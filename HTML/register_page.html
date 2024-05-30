@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
-    <link rel="stylesheet" href="/CSS/styles_register_page.css">
+    <link rel="stylesheet" href="/CSS/styles-register-page.css">
 </head>
 <body>
     <header>
@@ -42,12 +42,17 @@
             </div>
             <div class="form-group">
                 <label for="phone">Celular</label>
-                <input type="tel" id="phone" name="phone">
+                <input type="number" id="phone" name="phone">
                 <div id = "error-message-phone"></div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="profile-pic">Foto de Perfil</label>
                 <input type="file" id="profile-pic" name="profile-pic" accept="image/*">
+            </div> -->
+            <div class="form-group">
+                <label for="profile-pic">Foto de Perfil (URL)</label>
+                <input type="url" id="profile-pic" name="profile-pic" accept="image/*">
+                <div id="error-message-foto"></div>
             </div>
             <div class="form-group">
                 <label for="password">Senha</label>
@@ -62,7 +67,8 @@
             </div>
             <div class="form-group">
                 <label for="dob">Data de Nascimento</label>
-                <input type="date" id="dob" name="dob">
+                <input type="date" id="birthday" name="birthday">
+                <div id="error-message-birthday"></div>
             </div>
             <div class="form-group">
                 <label for="gender">Gênero</label>
@@ -72,6 +78,7 @@
                     <option value="female">Feminino</option>
                     <option value="other">Outro</option>
                 </select>
+                <div id="error-message-gender"></div>
             </div>
             <button type="submit" id = "btn_cadastrar" >Cadastrar</button>
         </form>
