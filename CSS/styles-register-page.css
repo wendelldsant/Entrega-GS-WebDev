@@ -51,6 +51,7 @@ h1 {
 
 .form-group {
     margin-bottom: 20px;
+    display: none;
 }
 
 .form-group label {
@@ -78,6 +79,7 @@ h1 {
 
 button {
     width: 100%;
+    margin: 10px;
     padding: 15px;
     background-color: #434040e0;
     color: #ffffff;
@@ -93,6 +95,9 @@ button:hover {
     transform: scale(1.02);
 }
 
+#btn_cadastrar{
+    display: none;
+}
 button:active {
     background-color: #004494;
     transform: scale(1);

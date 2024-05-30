@@ -209,6 +209,17 @@ function verificaFoto(){
 }
 // ############################ VALIDAÇÃO ############################
 
+let lista_usuarios = []
+const btn_voluntario = document.getElementById('btn_volunteer');
+const btn_empresa = document.getElementById('btn-empresa');
+
+btn_voluntario.addEventListener('click', function(event){
+    event.preventDefault();
+    const formularios = document.querySelectorAll('.form-group');
+    formularios.forEach(function(formulario) {
+        formulario.style.display = 'block';
+    });
+});
 btn_cadastrar.addEventListener('click', function(event){
     event.preventDefault();
     profile_username = verificaUsername();
@@ -224,6 +235,22 @@ btn_cadastrar.addEventListener('click', function(event){
         profile_regiao && profile_gender && profile_email &&
         profile_celular && profile_foto
     ){
-        window.open()
+        const new_user = {
+            username: username_id.value,
+            name: name_id.value,
+            senha: senha_id.value,
+            regiao: regiao_id.value,
+            gender: gender_id.value,
+            email: email_id.value,
+            celular: celular_id.value,
+            foto: foto_id.value,
+        }
+        lista_usuarios.unshift(new_user);
+        window.open('index.html');
+        };
+    
+    lista_usuarios.forEach(function(usuario, index) { /// validacao
+        console.log(`Usuário ${index + 1}:`, usuario);
+        })
     }
-})
+ )
