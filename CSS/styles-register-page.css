@@ -16,9 +16,10 @@ body {
 }
 
 header {
-    background-color: rgb(25, 11, 86) ;
+    background-image: url(/images/pexels-dio-alif-utomo-681655-1525589.jpg);
+    /* background-color: rgb(25, 11, 86); */
     width: 100%;
-    height: 15vh;
+    height: 10vh;
     padding: 20px 0;
     text-align: center;
     color: white;
@@ -28,7 +29,7 @@ header {
 
 header h3 {
     display: flex;
-    justify-content: right;
+    justify-content: left;
     font-size: 24px;
     margin: 10px;
 }
@@ -41,6 +42,7 @@ header h3 {
     width: 100%;
     max-width: 500px;
     margin-bottom: auto;
+    margin-top: auto;
 }
 
 h1 {
@@ -82,11 +84,16 @@ h1 {
     border-color: #007bff;
 }
 
+.button-container {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+}
+
 button {
     width: 100%;
-    margin: 10px;
     padding: 15px;
-    background-color: #434040e0;
+    background-color: #678d88e0;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -96,15 +103,33 @@ button {
 }
 
 button:hover {
-    background-color: #b30f00;
+    background-color: #117197;
     transform: scale(1.02);
 }
 
-#btn-cadastrar{
+#btn-cadastrar {
     display: none;
 }
+
 button:active {
     background-color: #004494;
     transform: scale(1);
+}
 
+.descricao-opcoes {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 110%;
+    transform: translateY(-50%);
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.button-container:hover .descricao-opcoes {
+    display: block;
 }

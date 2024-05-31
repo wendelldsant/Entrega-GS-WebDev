@@ -209,11 +209,12 @@ function verificaFoto(){
 }
 // ############################ VALIDAÇÃO ############################
 
-let lista_usuarios = []
+let lista_voluntarios = []
+let lista_empresas = []
 const btn_voluntario_register = document.getElementById('btn-volunteer');
 const btn_empresa_register = document.getElementById('btn-empresa');
 const register_form = document.getElementById('registration-form')
-
+var profileType = ''
 btn_voluntario_register.addEventListener('click', function(event){
     event.preventDefault();
     register_form.style.display = 'block';
@@ -221,7 +222,8 @@ btn_voluntario_register.addEventListener('click', function(event){
     btn_empresa_register.style.display = 'none';
     btn_cadastrar.style.display = 'block';
     let title = document.querySelector('h1');
-    title.innerHTML = 'Cadastro de Voluntário';   
+    title.innerHTML = 'Cadastro de Voluntário'; 
+    profileType = 'voluntario'  
 });
 
 btn_empresa_register.addEventListener('click', function(event){
@@ -232,12 +234,15 @@ btn_empresa_register.addEventListener('click', function(event){
     btn_cadastrar.style.display = 'block';
     let title = document.querySelector('h1');
     title.innerHTML = 'Cadastro de Empresa';
+    document.querySelector('#campo5').style.display = 'none';
+    document.querySelector('#campo9').style.display = 'none';
     document.querySelector('#campo10').style.display = 'none';
-
+    profileType = 'empresario'  
 });
 
 btn_cadastrar.addEventListener('click', function(event){
     event.preventDefault();
+    if(profileType === 'voluntario'){
     profile_username = verificaUsername();
     profile_name = verificaName();
     profile_senha = verificaSenha();
@@ -259,14 +264,33 @@ btn_cadastrar.addEventListener('click', function(event){
             gender: gender_id.value,
             email: email_id.value,
             celular: celular_id.value,
+            birthday: birthday_id.value,
             foto: foto_id.value,
         }
-        lista_usuarios.unshift(new_user);
-        window.open('index.html');
+        lista_voluntarios.unshift(new_user);
         };
-    
-    lista_usuarios.forEach(function(usuario, index) { /// validacao
-        console.log(`Usuário ${index + 1}:`, usuario);
-        })
+
     }
+    else{
+        profile_username = verificaUsername();
+        profile_name = verificaName();
+        profile_senha = verificaSenha();
+        profile_regiao = verificaOpcoes(regiao_id, error_msg_regiao);   
+        profile_email = verificaEmail();
+        profile_foto = verificaFoto();
+        if(profile_username && profile_name && profile_senha &&
+            profile_regiao && profile_email && profile_foto
+        ){
+            const new_user = {
+                username: username_id.value,
+                name: name_id.value,
+                senha: senha_id.value,
+                regiao: regiao_id.value,
+                email: email_id.value,
+                foto: foto_id.value,
+            }
+            lista_empresas.unshift(new_user);
+            };
+    }
+}
  )

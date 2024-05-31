@@ -8,10 +8,11 @@
 </head>
 <body>
     <header>
-        <h3>Área de Cadastro</h3>
+        <h3>BeOcean</h3>
     </header>
     <div class="container">
-        <h1> Em qual grupo você se encaixa?</h1>
+
+        <h1> O que você deseja?</h1>
         <form id="registration-form">
             <div class="form-group" id="campo1">
                 <label for="username">ID de Usuário</label>
@@ -82,9 +83,15 @@
             </div>
 
         </form>
-        <button type="submit" id = "btn-volunteer" >Voluntário</button>
-        <button type="submit" id = "btn-empresa" >Empresa</button>
-        <button type="submit" id = "btn-cadastrar" >Cadastrar</button>
+        <div class="button-container">
+            <button type="submit" id="btn-volunteer">Eu quero ajudar!</button>
+            <div class="descricao-opcoes" id="descricao-volunteer">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, asperiores.</div>
+        </div>
+        <div class="button-container">
+            <button type="submit" id="btn-empresa">Eu preciso de ajuda!</button>
+            <div class="descricao-opcoes" id="descricao-empresa">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio, ipsum?</div>
+        </div>
+        <button type="submit" id="btn-cadastrar">Cadastrar</button>
     </div>
     <script src="/JavaScript/script.js"></script>
 </body>
