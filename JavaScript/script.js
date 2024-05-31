@@ -1,5 +1,5 @@
 // ########################## CONST'S ##########################
-const btn_cadastrar = document.getElementById('btn_cadastrar');
+const btn_cadastrar = document.getElementById('btn-cadastrar');
 const char_number_id = 5;
 const special_caracteres = ['*', '&', '%', '$', '#', '@', '!'];
 const phone_lenght = 11;
@@ -221,6 +221,7 @@ btn_voluntario.addEventListener('click', function(event){
     })
     btn_voluntario.style.display = 'none';
     btn_empresa.style.display = 'none';
+    btn_cadastrar.style.display = 'block';
 });
 btn_cadastrar.addEventListener('click', function(event){
     event.preventDefault();
