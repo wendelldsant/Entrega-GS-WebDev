@@ -50,9 +50,13 @@ h1 {
     font-size: 26px;
 }
 
+#registration-form{
+    display: none;
+}
+
 .form-group {
     margin-bottom: 20px;
-    display: none;
+    /* display: none; */
 }
 
 .form-group label {

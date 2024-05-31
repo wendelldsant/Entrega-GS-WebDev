@@ -212,31 +212,28 @@ function verificaFoto(){
 let lista_usuarios = []
 const btn_voluntario_register = document.getElementById('btn-volunteer');
 const btn_empresa_register = document.getElementById('btn-empresa');
+const register_form = document.getElementById('registration-form')
 
 btn_voluntario_register.addEventListener('click', function(event){
     event.preventDefault();
-    const formularios = document.querySelectorAll('.form-group');
-    formularios.forEach(function(formulario) {
-        formulario.style.display = 'block';
-    })
+    register_form.style.display = 'block';
     btn_voluntario_register.style.display = 'none';
     btn_empresa_register.style.display = 'none';
     btn_cadastrar.style.display = 'block';
-
+    let title = document.querySelector('h1');
+    title.innerHTML = 'Cadastro de Voluntário';   
 });
 
 btn_empresa_register.addEventListener('click', function(event){
     event.preventDefault();
-    const formularios = document.querySelectorAll('.form-group');
-    formularios.forEach(function(formulario) {
-        formulario.style.display = 'block';
-    })
+    register_form.style.display = 'block';
     btn_empresa_register.style.display = 'none';
     btn_voluntario_register.style.display = 'none';
     btn_cadastrar.style.display = 'block';
     let title = document.querySelector('h1');
     title.innerHTML = 'Cadastro de Empresa';
-    gender.style.display = 'none'
+    document.querySelector('#campo10').style.display = 'none';
+
 });
 
 btn_cadastrar.addEventListener('click', function(event){
