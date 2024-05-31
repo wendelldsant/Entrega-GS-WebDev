@@ -210,7 +210,7 @@ function verificaFoto(){
 // ############################ VALIDAÇÃO ############################
 
 let lista_usuarios = []
-const btn_voluntario = document.getElementById('btn_volunteer');
+const btn_voluntario = document.getElementById('btn-volunteer');
 const btn_empresa = document.getElementById('btn-empresa');
 
 btn_voluntario.addEventListener('click', function(event){
@@ -218,7 +218,9 @@ btn_voluntario.addEventListener('click', function(event){
     const formularios = document.querySelectorAll('.form-group');
     formularios.forEach(function(formulario) {
         formulario.style.display = 'block';
-    });
+    })
+    btn_voluntario.style.display = 'none';
+    btn_empresa.style.display = 'none';
 });
 btn_cadastrar.addEventListener('click', function(event){
     event.preventDefault();

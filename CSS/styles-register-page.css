@@ -40,6 +40,7 @@ header h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
+    margin-bottom: auto;
 }
 
 h1 {
@@ -95,7 +96,7 @@ button:hover {
     transform: scale(1.02);
 }
 
-#btn_cadastrar{
+#btn-cadastrar{
     display: none;
 }
 button:active {
