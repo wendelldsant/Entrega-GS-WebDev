@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Empresas</title>
+    <link rel="stylesheet" href="/CSS/styles-events.css">
+</head>
+<body>
+    <header>
+        <h1>Eventos de Conservação do Oceano</h1>
+    </header>
+    <main>
+        <section id ="escolha">
+        <button type="submit" id="btnEventosDisponiveis">Eventos Disponíveis</button>
+        <button type="submit" id="btnCriarEvento">Criar Novo Evento</button>  
+    </section>
+        <section id="eventosDisponiveis" class="hidden">
+        </section>
+        <section id="criarEvento" class="hidden">
+            <h2>Criar Novo Evento</h2>
+            <form id="formCriarEvento">
+                <label for="nomeEvento">Nome do Evento:</label>
+                <input type="text" id="nomeEvento" name="nomeEvento" required>
+                
+                <label for="dataEvento">Data:</label>
+                <input type="date" id="dataEvento" name="dataEvento" required>
+                
+                <label for="localEvento">Local:</label>
+                <input type="text" id="localEvento" name="localEvento" required>
+                
+                <label for="descricaoEvento">Descrição:</label>
+                <textarea id="descricaoEvento" name="descricaoEvento" rows="4" required></textarea>
+                
+                <button type="submit" id="cadastrarEvento">Criar Evento</button>
+            </form>
+        </section>
+        
+    </main>
+    <script src="/JavaScript/script.js"></script>
+</body>
+</html>
