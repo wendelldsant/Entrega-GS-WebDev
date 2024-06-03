@@ -13,27 +13,29 @@
     <main>
         <section id ="escolha">
         <button type="submit" id="btnEventosDisponiveis">Eventos Disponíveis</button>
-        <button type="submit" id="btnCriarEvento">Criar Novo Evento</button>  
+        <button type="submit" id="btnCriarNovoEvento">Criar Novo Evento</button>  
     </section>
         <section id="eventosDisponiveis" class="hidden">
         </section>
         <section id="criarEvento" class="hidden">
-            <h2>Criar Novo Evento</h2>
-            <form id="formCriarEvento">
-                <label for="nomeEvento">Nome do Evento:</label>
-                <input type="text" id="nomeEvento" name="nomeEvento" required>
-                
-                <label for="dataEvento">Data:</label>
-                <input type="date" id="dataEvento" name="dataEvento" required>
-                
-                <label for="localEvento">Local:</label>
-                <input type="text" id="localEvento" name="localEvento" required>
-                
-                <label for="descricaoEvento">Descrição:</label>
-                <textarea id="descricaoEvento" name="descricaoEvento" rows="4" required></textarea>
-                
-                <button type="submit" id="cadastrarEvento">Criar Evento</button>
-            </form>
+        <div>
+                <h2>Criar Novo Evento</h2>
+                <form id="formCriarEvento">
+                    <label for="nomeEvento">Nome do Evento:</label>
+                    <input class="campo" type="text" id="nomeEvento" name="nomeEvento" input>
+                    
+                    <label for="dataEvento">Data:</label>
+                    <input class="campo" type="date" id="dataEvento" name="dataEvento" input>
+
+                    <label for="localEvento">Local:</label>
+                    <input class="campo" type="text" id="localEvento" name="localEvento" input>
+                    
+                    <label for="descricaoEvento">Descrição:</label>
+                    <textarea class="campo" id="descricaoEvento" name="descricaoEvento" rows="4"></textarea>
+                    
+                    <button type="submit" id="cadastrarEvento">Cadastrar Evento</button>
+                </form>
+        </div>
         </section>
         
     </main>

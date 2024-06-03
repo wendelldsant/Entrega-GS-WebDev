@@ -16,7 +16,7 @@ h1 {
     margin: 0;
 }
 
-#btnCriarEvento {
+#btnCriarNovoEvento {
     background-color: #023e8a;
     color: white;
     border: none;
@@ -43,7 +43,7 @@ main {
     padding: 1rem;
     margin-bottom: 2rem;
     border-radius: 8px;
-    width: 50%;
+    width: 95vw;
 }
 
 .evento {
@@ -76,6 +76,6 @@ button {
 }
 
 .hidden {
-    /* background-color: #23117f; */
+    background-color: #23117f;
     display: none;
 }
