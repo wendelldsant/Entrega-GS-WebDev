@@ -293,3 +293,153 @@ btn_cadastrar.addEventListener('click', function(event){
     }
 }
  )
+
+
+// ################################## EVENT PAGE #######################################
+
+const btn_event = document.getElementById("cadastrarEvento");
+const event_name = document.getElementById("nomeEvento");
+const user_teste = 'wendell_dsant'
+const descricao = document.getElementById('descricaoEvento');
+const name_event = document.getElementById('nomeEvento');
+const local_event = document.getElementById('localEvento');
+const data_event = document.getElementById('dataEvento');
+const create_section = document.getElementById('criarEvento');
+
+
+ let listaEventos = []
+
+// #######CRUD
+// #########CREATE
+function criaEventos(dados){
+    const new_event = {
+            id: listaEventos.length+1,
+            owner: dados.owner,
+            name_event: dados.name_event,
+            data_event: dados.data_event,
+            local_event: dados.local_event,
+            content: dados.content
+        }
+    if(new_event.name_event!='' && new_event.data_event!='' && new_event.local_event!='' &&  new_event.content!=''){
+        alert('Evento aceito!')
+        listaEventos.push(new_event);
+        pegaEventos();
+        return true;
+    }
+    else{
+        alert("Preencha todos os campos!")
+    }
+
+}
+
+// ###########READ
+
+window.onload = pegaEventos();   
+const btn_pegaEventos = document.querySelector('#btnEventosDisponiveis');
+function pegaEventos(){
+    const eventosDisponiveis = document.querySelector('#eventosDisponiveis');
+    eventosDisponiveis.innerHTML = ''
+    eventosDisponiveis.innerHTML = `
+    <button type="submit" id="btnEventosDisponiveis">Eventos Disponíveis</button>
+    <button type="submit" id="btnCriarEvento">Criar Novo Evento</button>    
+    `
+    listaEventos.forEach(evento => {
+            let new_event = document.createElement('div');
+            new_event.id = `evento${evento.id}`;
+            new_event.innerHTML = `   
+            <div class = "evento">
+                <h3>${evento.name_event}</h3>
+                <p>Usuário:${evento.owner}</p>
+                <p>Data: ${evento.data_event}</p>
+                <p>Local:${evento.local_event}</p>
+                <p>Descrição:${evento.content}</p>
+                <button onclick = "atualizarEvento(${evento.id})">Editar</button>
+                <button onclick = "apagarEvento(${evento.id})">Apagar</button>
+            </div>
+        `
+        eventosDisponiveis.append(new_event);
+        }
+    
+    )
+    const btn_new_event = document.getElementById("btnCriarEvento");
+    btn_new_event.addEventListener('click', function(event){
+    event.preventDefault();
+    create_section.style.display = 'block'    
+    // document.getElementsByClassName("evento").style.display = 'none'
+})
+}
+
+// ###########UPDATE
+function atualizarEvento(id){
+    const evento = listaEventos.find(evento => evento.id === id);
+    if (!evento) return;  // se evento for igual a vazio, null, NaN etc, vai fechar a função
+    const update_section = document.createElement('section');
+    update_section.id = `updateEvent${id}`;
+    update_section.innerHTML = `
+    <h2>Atualizar Evento</h2>
+    <form id="formAtualizarEvento${id}">
+        <label for="nomeEventoAtualizado${id}">Nome do Evento:</label>
+        <input type="text" id="nomeEventoAtualizado${id}" value="${evento.name_event}" required>
+        
+        <label for="dataEventoAtualizado${id}">Data:</label>
+        <input type="date" id="dataEventoAtualizado${id}" value="${evento.data_event}" required>
+        
+        <label for="localEventoAtualizado${id}">Local:</label>
+        <input type="text" id="localEventoAtualizado${id}" value="${evento.local_event}" required>
+        
+        <label for="descricaoEventoAtualizado${id}">Descrição:</label>
+        <textarea id="descricaoEventoAtualizado${id}" rows="4" required>${evento.content}</textarea>
+        
+        <button type="button" onclick="salvarAtualizacao(${id})">Salvar</button>
+    </form>
+    `   
+    document.querySelector(`#evento${id}`).append(update_section);
+}   
+
+function salvarAtualizacao(id) {
+    const evento = listaEventos.find(evento => evento.id === id);
+    if (!evento) return;
+    
+    evento.name_event = document.getElementById(`nomeEventoAtualizado${id}`).value;
+    evento.data_event = document.getElementById(`dataEventoAtualizado${id}`).value;
+    evento.local_event = document.getElementById(`localEventoAtualizado${id}`).value;
+    evento.content = document.getElementById(`descricaoEventoAtualizado${id}`).value;
+    
+    pegaEventos();
+}   
+
+// ###########DELETE
+
+function apagarEvento(id){
+    const evento = listaEventos.find(evento => evento.id === id);
+    if (!evento) return;
+    listaEventos.splice(evento,1);
+    pegaEventos();
+}
+
+function criar_novo_evento(){
+btn_event.addEventListener('click', function(event){
+    event.preventDefault();
+    let eventosDisponiveis = document.getElementById("eventosDisponiveis")
+    eventosDisponiveis.style.display = 'none'
+    let novoevento = criaEventos({
+        owner: user_teste,
+        content: descricao.value,
+        name_event: name_event.value,
+        data_event: data_event.value,
+        local_event: local_event.value
+    });
+    if(novoevento){
+        create_section.style.display = 'none'        
+    }
+})
+}
+btn_pegaEventos.addEventListener("click", function(event){
+    event.preventDefault();
+    let eventosDisponiveis = document.getElementById("eventosDisponiveis")
+    create_section.style.display = 'none'   
+    eventosDisponiveis.style.display = 'block'
+})
+
+
+
