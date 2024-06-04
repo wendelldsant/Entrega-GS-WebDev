@@ -212,7 +212,21 @@ let lista_voluntarios = []
 let lista_empresas = []
 const btn_voluntario_register = document.getElementById('btn-volunteer');
 const btn_empresa_register = document.getElementById('btn-empresa');
-const register_form = document.getElementById('registration-form')
+const register_form = document.getElementById('registration-form');
+const btnlogin_in = document.getElementById('btn-login');
+const btncadastrar_se = document.getElementById('btnCadastreSe');
+
+btnlogin_in.addEventListener('click', function(event){
+    event.preventDefault();
+    register_form.style.display = 'block';
+    let lista_block = [campo2,campo3,campo4,campo5,campo6,campo8,campo9,campo10];
+    lista_block.forEach(campo =>{
+        campo.style.display = 'none';
+    })
+    btncadastrar_se.style.display = 'none'
+
+})
+
 var profileType = ''
 btn_voluntario_register.addEventListener('click', function(event){
     event.preventDefault();
