@@ -3,10 +3,10 @@
 const btn_event = document.getElementById("cadastrarEvento");
 const event_name = document.getElementById("nomeEvento");
 const user_teste = 'wendell_dsant'
-const descricao = document.getElementById('descricaoEvento');
-const name_event = document.getElementById('nomeEvento');
-const local_event = document.getElementById('localEvento');
-const data_event = document.getElementById('dataEvento');
+// const descricao = document.getElementById('descricaoEvento');
+// const name_event = document.getElementById('nomeEvento');
+// const local_event = document.getElementById('localEvento');
+// const data_event = document.getElementById('dataEvento');
 const create_section = document.getElementById('criarEvento');
 const eventosDisponiveis = document.querySelector('#eventosDisponiveis');
 const btn_pegaEventos = document.querySelector('#btnEventosDisponiveis');
@@ -74,9 +74,10 @@ function pegaEventos(){
 
 // ###########UPDATE
 function atualizarEvento(id){
+    pegaEventos();
     const evento = listaEventos.find(evento => evento.id === id);
     if (!evento) return;  // se evento for igual a vazio, null, NaN etc, vai fechar a função
-    const update_section = document.createElement('section');
+    const update_section = document.createElement('div');
     update_section.id = `updateEvent${id}`;
     update_section.innerHTML = `
     <h2>Atualizar Evento</h2>
@@ -118,7 +119,7 @@ function apagarEvento(id){
     pegaEventos();
 }
 
-
+// ################CADASTRAR EVENTO
 btn_new_event.addEventListener('click', function(event){
     event.preventDefault();
     eventosDisponiveis.style.display = 'none'
@@ -145,45 +146,51 @@ btn_new_event.addEventListener('click', function(event){
     create_section.append(create_form);
     create_section.style.display = 'block'; 
 
+    const descricao = document.getElementById('descricaoEvento');
+    const name_event = document.getElementById('nomeEvento');
+    const local_event = document.getElementById('localEvento');
+    const data_event = document.getElementById('dataEvento');
+
+    document.querySelector('#cadastrarEvento').addEventListener('click', function(event){
+        event.preventDefault();
+        let novoevento = criaEventos({
+            owner: user_teste,
+            content: descricao.value,
+            name_event: name_event.value,
+            data_event: data_event.value,
+            local_event: local_event.value
+        });
+        console.log(novoevento)
+        if(novoevento){
+            create_section.innerHTML = ''
+            create_form = document.createElement('div')
+            create_form.innerHTML= `
+                <h2>Criar Novo Evento</h2>
+                <form id="formCriarEvento">
+                    <label for="nomeEvento">Nome do Evento:</label>
+                    <input class="campo" type="text" id="nomeEvento" name="nomeEvento" input>
+                    
+                    <label for="dataEvento">Data:</label>
+                    <input class="campo" type="date" id="dataEvento" name="dataEvento" input>
+    
+                    <label for="localEvento">Local:</label>
+                    <input class="campo" type="text" id="localEvento" name="localEvento" input>
+                    
+                    <label for="descricaoEvento">Descrição:</label>
+                    <textarea class="campo" id="descricaoEvento" name="descricaoEvento" rows="4"></textarea>
+                    
+                    <button type="submit" id="cadastrarEvento">Cadastrar Evento</button>
+                </form>
+            `
+            create_section.append(create_form);
+            create_section.style.display = 'none'
+            eventosDisponiveis.style.display = 'block'
+        }
+    })
+
 
 })
 
-
-document.querySelector('#cadastrarEvento').addEventListener('click', function(event){
-    event.preventDefault();
-    let novoevento = criaEventos({
-        owner: user_teste,
-        content: descricao.value,
-        name_event: name_event.value,
-        data_event: data_event.value,
-        local_event: local_event.value
-    });
-    if(novoevento){
-        create_section.innerHTML = ''
-        create_form = document.createElement('div')
-        create_form.innerHTML= `
-            <h2>Criar Novo Evento</h2>
-            <form id="formCriarEvento">
-                <label for="nomeEvento">Nome do Evento:</label>
-                <input class="campo" type="text" id="nomeEvento" name="nomeEvento" input>
-                
-                <label for="dataEvento">Data:</label>
-                <input class="campo" type="date" id="dataEvento" name="dataEvento" input>
-
-                <label for="localEvento">Local:</label>
-                <input class="campo" type="text" id="localEvento" name="localEvento" input>
-                
-                <label for="descricaoEvento">Descrição:</label>
-                <textarea class="campo" id="descricaoEvento" name="descricaoEvento" rows="4"></textarea>
-                
-                <button type="submit" id="cadastrarEvento">Cadastrar Evento</button>
-            </form>
-        `
-        create_section.append(create_form);
-        create_section.style.display = 'none'
-        eventosDisponiveis.style.display = 'block'
-    }
-})
 
 btn_pegaEventos.addEventListener("click", function(event){
     event.preventDefault();
