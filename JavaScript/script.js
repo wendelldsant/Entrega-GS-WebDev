@@ -220,7 +220,7 @@ btn_voluntario_register.addEventListener('click', function(event){
     btn_voluntario_register.style.display = 'none';
     btn_empresa_register.style.display = 'none';
     btn_cadastrar.style.display = 'block';
-    let title = document.querySelector('h1');
+    let title = document.querySelector('h3');
     title.innerHTML = 'Cadastro de Voluntário'; 
     profileType = 'voluntario'  
 });
@@ -231,7 +231,7 @@ btn_empresa_register.addEventListener('click', function(event){
     btn_empresa_register.style.display = 'none';
     btn_voluntario_register.style.display = 'none';
     btn_cadastrar.style.display = 'block';
-    let title = document.querySelector('h1');
+    let title = document.querySelector('h3');
     title.innerHTML = 'Cadastro de Empresa';
     document.querySelector('#campo5').style.display = 'none';
     document.querySelector('#campo9').style.display = 'none';

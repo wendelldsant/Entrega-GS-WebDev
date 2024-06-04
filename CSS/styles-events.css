@@ -1,22 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} 
 body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/imagem_volunteer2.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff;
+    color: white;
 }
 
 header {
-    background-color: #0077b6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 1rem;
-    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+nav ul {
+    display: flex;
+    list-style: none;
     margin: 0;
+    padding: 0;
 }
 
-#btnCriarNovoEvento {
+nav ul li {
+    margin-right: 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+
+header h1 {
+    font-size: 24px;
+}
+
+
+#btnCriarNovoEvento, #btnEventosDisponiveis {
     background-color: #023e8a;
     color: white;
     border: none;
@@ -24,30 +61,21 @@ h1 {
     cursor: pointer;
     margin-top: 1rem;
 }
-
-#btnEventosDisponiveis {
-    background-color: #023e8a;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
+        
 main {
     padding: 2rem;
 }
 
 #eventosDisponiveis, #criarEvento {
-    background-color: #e0f7fa;
+    background-color: rgba(9, 195, 219, 0.832);
     padding: 1rem;
     margin-bottom: 2rem;
     border-radius: 8px;
-    width: 95vw;
+    width: auto;
 }
 
 .evento {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;  
     padding-bottom: 1rem;
     margin-bottom: 1rem;
 }
@@ -58,7 +86,8 @@ label {
 }
 
 input, textarea {
-    width: 100%;
+    width: 95%;
+    margin-left: 20px;
     padding: 0.5rem;
     margin-top: 0.5rem;
     border: 1px solid #ccc;
@@ -76,6 +105,5 @@ button {
 }
 
 .hidden {
-    background-color: #23117f;
     display: none;
 }
