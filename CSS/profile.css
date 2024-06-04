@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/pexels-muffin-1646311.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/imagem_volunteer.jpeg");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -73,34 +73,31 @@ h3 {
     font-size: 26px;
 }
 
-#registration-form {
-    display: none;
-}
-
-.form-group {
+.profile-info {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 10px;
+.profile-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-info h2 {
+    margin: 0;
+}
+
+.profile-data {
+    margin-bottom: 20px;
+}
+
+.profile-data label {
     font-weight: bold;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    background-color: #ffffff;
-    border-color: #007bff;
 }
 
 .button-container {
@@ -126,29 +123,7 @@ button:hover {
     transform: scale(1.02);
 }
 
-#btn-cadastrar {
-    display: none;
-}
-
 button:active {
     background-color: #004494;
     transform: scale(1);
-}
-
-.descricao-opcoes {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 110%;
-    transform: translateY(-50%);
-    background-color: #343a40;
-    color: #ffffff;
-    padding: 10px;
-    border-radius: 8px;
-    white-space: nowrap;
-    z-index: 1;
-}
-
-.button-container:hover .descricao-opcoes {
-    display: block;
 }
