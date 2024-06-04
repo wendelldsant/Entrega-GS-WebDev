@@ -266,7 +266,20 @@ btn_cadastrar.addEventListener('click', function(event){
             birthday: birthday_id.value,
             foto: foto_id.value,
         }
-        lista_voluntarios.unshift(new_user);
+        lista_voluntarios.push(new_user);
+        let container = document.querySelector('.container')
+        container.innerHTML = ''
+        container.innerHTML = `
+        <div class="container">
+        <h3>Cadastro realizado!</h3>
+            <div class="button-container">
+                <button type="submit">Página Inicial - Sobre nós</button>
+            </div>
+            <div class="button-container">
+            <button type="submit">Voluntarie-se!</button>
+            </div>
+        </div>
+        `
         };
 
     }
@@ -288,7 +301,20 @@ btn_cadastrar.addEventListener('click', function(event){
                 email: email_id.value,
                 foto: foto_id.value,
             }
-            lista_empresas.unshift(new_user);  // testar com o push
+            lista_empresas.push(new_user);
+            let container = document.querySelector('.container')
+            container.innerHTML = ''
+            container.innerHTML = `
+            <div class="container">
+            <h3>Cadastro realizado!</h3>
+                <div class="button-container">
+                    <button type="submit">Página Inicial - Sobre nós</button>
+                </div>
+                <div class="button-container">
+                <button type="submit">Crie Eventos!</button>
+                </div>
+            </div>
+            `
             };
     }
 }
