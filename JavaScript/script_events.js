@@ -1,6 +1,6 @@
 // ################################## EVENT PAGE #######################################
 const lista_voluntarios = JSON.parse(localStorage.getItem('voluntarios_users'));
-const lista_empresas = JSON.parse(localStorage.getItem('empresas_user'));
+const lista_empresas = JSON.parse(localStorage.getItem('empresas_users'));
 const login_check = JSON.parse(localStorage.getItem('login_check'));
 
 
@@ -8,18 +8,22 @@ function verifyUser(){
 lista_voluntarios.forEach(user =>{
     if(login_check.username === user.username){
         console.log(user.profileType)
+        document.getElementById('btnCriarNovoEvento').style.display = 'none'  
         return user.profileType;
+
+    }
+})
+lista_empresas.forEach(user =>{
+    if(login_check.username === user.username){
+        console.log(user.profileType)
+        document.getElementById('btnCriarNovoEvento').style.display = 'block'
+        return user.profileType;
+
     }
 })
 }
 
-window.onload = verifyUser();
-if(window.onload = 'voluntario'){
-    document.getElementById('btnCriarNovoEvento').style.display = 'none'
-}
-else{
-    document.getElementById('btnCriarNovoEvento').style.display = 'block'  
-}
+window.onload = verifyUser()
 
 const btn_event = document.getElementById("cadastrarEvento");
 const event_name = document.getElementById("nomeEvento");
