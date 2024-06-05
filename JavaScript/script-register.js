@@ -245,7 +245,7 @@ function verificarSenhaxLogin(){
     return ''; 
 }
 // ############################ VALIDAÇÃO ############################
-var login_check = false
+var login_check = JSON.parse(localStorage.getItem('login_check'));
 localStorage.setItem('login_check', JSON.stringify(login_check));
 let lista_voluntarios = [];
 let lista_empresas = [];
@@ -352,7 +352,6 @@ btncadastrar_se.addEventListener('click', function(event){
         btnSubmitCadastro.style.display = 'block';
         let title = document.querySelector('h3');
         title.innerHTML = 'Cadastro de Empresa';
-        document.querySelector('#campo5').style.display = 'none';
         document.querySelector('#campo9').style.display = 'none';
         document.querySelector('#campo10').style.display = 'none';
         profileType = 'empresa'  
@@ -428,6 +427,7 @@ btn_cadastrar.addEventListener('click', function(event){
                 senha: senha_id.value,
                 regiao: regiao_id.value,
                 email: email_id.value,
+                celular: celular_id.value,
                 foto: foto_id.value,
                 profileType: 'empresa'
             }
