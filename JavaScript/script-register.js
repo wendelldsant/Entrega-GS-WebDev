@@ -101,7 +101,10 @@ function verificaUsername(){
     else if(verificaElementos(username.includes(' '), username_id, error_msg_username, 'O ID de usuário não pode conter espaços')){
         return false;
     }
-    else if(verificaElementos(username.length<char_number_id, username_id, error_msg_username, `O ID de usuário deve ter no mínimo ${char_number_id} caracteres`)){
+    else if(verificaElementos(username.length < char_number_id, username_id, error_msg_username, `O ID de usuário deve ter no mínimo ${char_number_id} caracteres`)){
+        return false;
+    }
+    else if(verificaUsernameExistente(username)){
         return false;
     }
     else{
@@ -109,6 +112,21 @@ function verificaUsername(){
         return true;
     }
 }
+
+function verificaUsernameExistente(username){
+    if(lista_voluntarios.some(user => user.username === username)){
+        verificaElementos(true, username_id, error_msg_username, 'Este ID de usuário já está em uso');
+        return true;
+    }
+    else if(lista_empresas.some(user => user.username === username)){
+        verificaElementos(true, username_id, error_msg_username, 'Este ID de usuário já está em uso');
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 
 function verificaName(){
     let name = name_id.value;
@@ -206,12 +224,40 @@ function verificaFoto(){
         return true;
     }
 }
-// ############################ VALIDAÇÃO ############################
 
-let lista_voluntarios = []
-let lista_empresas = []
-const btn_voluntario_register = document.getElementById('btn-volunteer');
-const btn_empresa_register = document.getElementById('btn-empresa');
+function verificaLoginVoluntarios(){
+    return lista_voluntarios.some(voluntario => voluntario.username === username_id.value);
+}
+function verificaLoginEmpresas(){
+    return lista_empresas.some(empresa => empresa.username === username_id.value);
+}
+function verificarSenhaxLogin(){
+    for (let voluntario of lista_voluntarios) {
+        if (voluntario.username === username_id.value) {
+            return voluntario.senha;
+        }
+    }
+    for (let empresa of lista_empresas) {
+        if (empresa.username === username_id.value) {
+            return empresa.senha;
+        }
+    }
+    return ''; 
+}
+// ############################ VALIDAÇÃO ############################
+var login_check = false
+localStorage.setItem('login_check', JSON.stringify(login_check));
+let lista_voluntarios = [];
+let lista_empresas = [];
+
+// Carregar dados do localStorage
+if (localStorage.getItem('voluntarios_users')) {
+    lista_voluntarios = JSON.parse(localStorage.getItem('voluntarios_users'));
+}
+if (localStorage.getItem('empresas_users')) {
+    lista_empresas = JSON.parse(localStorage.getItem('empresas_users'));
+}
+
 const register_form = document.getElementById('registration-form');
 const btnlogin_in = document.getElementById('btn-login');
 const btncadastrar_se = document.getElementById('btnCadastreSe');
@@ -224,34 +270,95 @@ btnlogin_in.addEventListener('click', function(event){
         campo.style.display = 'none';
     })
     btncadastrar_se.style.display = 'none'
+    document.getElementById("buttons").innerHTML = ''
+    document.getElementById("buttons").innerHTML = `
+    <div class="button-container">
+        <button type="submit" id="btn-entrar">Entrar</button>
+    </div>
+    `
+    document.getElementById("btn-entrar").addEventListener('click', function(event){
+    error_msg_password.innerHTML = ''
+    error_msg_username.innerHTML = ''
+    event.preventDefault(); 
+    let verificarCadastro_Volunt = verificaLoginVoluntarios();
+    let verificarCadastro_Empresas = verificaLoginEmpresas();
+    if(verificarCadastro_Volunt!='' || verificarCadastro_Empresas!=''){
+        confirmDados(error_msg_username, username_id);
+        let senhaXuser = verificarSenhaxLogin()
+        if(senhaXuser!=''){
+            if(senhaXuser===senha_id.value){
+                let container = document.querySelector('.container')
+                container.innerHTML = ''
+                container.innerHTML = `
+                <div class="container">
+                <h3>Login realizado!</h3>
+                    <div class="button-container">
+                        <button type="submit"><a href="index.html" style = "text-decoration: none; color: #ffffff">Página Inicial - Sobre nós</button>
+                    </div>
+                `
+                let user_online = {
+                    username: username_id.value,
+                    senha: senha_id.value,
+                }
+                login_check = user_online;
+                localStorage.setItem('login_check', JSON.stringify(login_check));
+            }
+            else{
+                verificaElementos(true,senha_id, error_msg_password, 'Senha inválida.')
+            }
+        }
+    }
+    else{
+        verificaElementos(true, username_id, error_msg_username, 'Usuário inexistente')
+    }
+})   
 
 })
 
-var profileType = ''
-btn_voluntario_register.addEventListener('click', function(event){
+btncadastrar_se.addEventListener('click', function(event){
     event.preventDefault();
-    register_form.style.display = 'block';
-    btn_voluntario_register.style.display = 'none';
-    btn_empresa_register.style.display = 'none';
-    btn_cadastrar.style.display = 'block';
-    let title = document.querySelector('h3');
-    title.innerHTML = 'Cadastro de Voluntário'; 
-    profileType = 'voluntario'  
-});
+    register_form.style.display = 'none';
+    divBtns = document.getElementById("buttons")
+    divBtns.innerHTML = `
+    <div class="button-container" id = "btn-volunteer">
+        <button type="submit" id="btn-volunteer">Eu quero ajudar!</button>
+        <div class="descricao-opcoes" id="descricao-volunteer">Seja um voluntário ativo em nossa plataforma.</div>
+    </div>
+    <div class="button-container" id = "btn-empresa">
+        <button type="submit" id="btn-empresa">Eu preciso de ajuda!</button>
+        <div class="descricao-opcoes" id="descricao-empresa">Seja uma organização parceira em nossa plataforma.</div>
+    </div
+    `
+    const btn_voluntario_register = document.getElementById('btn-volunteer');
+    const btn_empresa_register = document.getElementById('btn-empresa');
+    const btnSubmitCadastro = document.getElementById("btn-cadastrar");
 
-btn_empresa_register.addEventListener('click', function(event){
-    event.preventDefault();
-    register_form.style.display = 'block';
-    btn_empresa_register.style.display = 'none';
-    btn_voluntario_register.style.display = 'none';
-    btn_cadastrar.style.display = 'block';
-    let title = document.querySelector('h3');
-    title.innerHTML = 'Cadastro de Empresa';
-    document.querySelector('#campo5').style.display = 'none';
-    document.querySelector('#campo9').style.display = 'none';
-    document.querySelector('#campo10').style.display = 'none';
-    profileType = 'empresario'  
-});
+    btn_voluntario_register.addEventListener('click', function(event){
+        event.preventDefault();
+        register_form.style.display = 'block';
+        btn_voluntario_register.style.display = 'none';
+        btn_empresa_register.style.display = 'none';
+        btnSubmitCadastro.style.display = 'block';
+        let title = document.querySelector('h3');
+        title.innerHTML = 'Cadastro de Voluntário'; 
+        profileType = 'voluntario'  
+    });
+
+    btn_empresa_register.addEventListener('click', function(event){
+        event.preventDefault();
+        register_form.style.display = 'block';
+        btn_empresa_register.style.display = 'none';
+        btn_voluntario_register.style.display = 'none';
+        btnSubmitCadastro.style.display = 'block';
+        let title = document.querySelector('h3');
+        title.innerHTML = 'Cadastro de Empresa';
+        document.querySelector('#campo5').style.display = 'none';
+        document.querySelector('#campo9').style.display = 'none';
+        document.querySelector('#campo10').style.display = 'none';
+        profileType = 'empresa'  
+    });
+})
+
 
 btn_cadastrar.addEventListener('click', function(event){
     event.preventDefault();
@@ -279,6 +386,7 @@ btn_cadastrar.addEventListener('click', function(event){
             celular: celular_id.value,
             birthday: birthday_id.value,
             foto: foto_id.value,
+            profileType: 'voluntario'
         }
         lista_voluntarios.push(new_user);
         let container = document.querySelector('.container')
@@ -287,13 +395,20 @@ btn_cadastrar.addEventListener('click', function(event){
         <div class="container">
         <h3>Cadastro realizado!</h3>
             <div class="button-container">
-                <button type="submit">Página Inicial - Sobre nós</button>
+                <button type="submit"><a href="index.html" style = "text-decoration: none; color: #ffffff">Página Inicial - Sobre nós</button>
             </div>
             <div class="button-container">
-            <button type="submit">Voluntarie-se!</button>
+                <button type="submit"><a href="events.html" style = "text-decoration: none; color: #ffffff">Eventos Disponíveis!</a></button>
             </div>
         </div>
         `
+        let user_online = {
+            username: username_id.value,
+            senha: senha_id.value
+        }
+        login_check = user_online;
+        localStorage.setItem('login_check', JSON.stringify(login_check));
+        localStorage.setItem('voluntarios_users', JSON.stringify(lista_voluntarios));
         };
 
     }
@@ -314,6 +429,7 @@ btn_cadastrar.addEventListener('click', function(event){
                 regiao: regiao_id.value,
                 email: email_id.value,
                 foto: foto_id.value,
+                profileType: 'empresa'
             }
             lista_empresas.push(new_user);
             let container = document.querySelector('.container')
@@ -322,14 +438,23 @@ btn_cadastrar.addEventListener('click', function(event){
             <div class="container">
             <h3>Cadastro realizado!</h3>
                 <div class="button-container">
-                    <button type="submit">Página Inicial - Sobre nós</button>
+                    <button type="submit"><a href="index.html" style = "text-decoration: none; color: #ffffff">Página Inicial - Sobre nós</button>
                 </div>
                 <div class="button-container">
-                <button type="submit">Crie Eventos!</button>
+                    <button type="submit"><a href="events.html" style = "text-decoration: none; color: #ffffff">Crie Eventos!</a></button>
                 </div>
             </div>
             `
+            let user_online = {
+                username: username_id.value,
+                senha: senha_id.value,
+            }
+            login_check = user_online;
+            localStorage.setItem('login_check', JSON.stringify(login_check));
+            localStorage.setItem('empresas_users', JSON.stringify(lista_empresas));
             };
     }
 }
  )
+
+

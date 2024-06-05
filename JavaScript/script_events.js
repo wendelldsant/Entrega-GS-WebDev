@@ -1,4 +1,25 @@
 // ################################## EVENT PAGE #######################################
+const lista_voluntarios = JSON.parse(localStorage.getItem('voluntarios_users'));
+const lista_empresas = JSON.parse(localStorage.getItem('empresas_user'));
+const login_check = JSON.parse(localStorage.getItem('login_check'));
+
+
+function verifyUser(){
+lista_voluntarios.forEach(user =>{
+    if(login_check.username === user.username){
+        console.log(user.profileType)
+        return user.profileType;
+    }
+})
+}
+
+window.onload = verifyUser();
+if(window.onload = 'voluntario'){
+    document.getElementById('btnCriarNovoEvento').style.display = 'none'
+}
+else{
+    document.getElementById('btnCriarNovoEvento').style.display = 'block'  
+}
 
 const btn_event = document.getElementById("cadastrarEvento");
 const event_name = document.getElementById("nomeEvento");
@@ -62,8 +83,8 @@ function pegaEventos(){
                 <p>Data: ${evento.data_event}</p>
                 <p>Local:${evento.local_event}</p>
                 <p>Descrição:${evento.content}</p>
-                <button onclick = "atualizarEvento(${evento.id})">Editar</button>
-                <button onclick = "apagarEvento(${evento.id})">Apagar</button>
+                <button id = "btnUpdate" onclick = "atualizarEvento(${evento.id})">Editar</button>
+                <button id = "btnDelete" onclick = "apagarEvento(${evento.id})">Apagar</button>
             </div>
         `
         eventosDisponiveis.append(new_event);
@@ -160,7 +181,6 @@ btn_new_event.addEventListener('click', function(event){
             data_event: data_event.value,
             local_event: local_event.value
         });
-        console.log(novoevento)
         if(novoevento){
             create_section.innerHTML = ''
             create_form = document.createElement('div')
