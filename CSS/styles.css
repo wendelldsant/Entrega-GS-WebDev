@@ -115,16 +115,15 @@ nav ul li a:hover {
     gap: 30px;
     color: var(--color-light); 
     text-align: center;   
+}
+.principal h2 {
+    font-size: clamp(20px, 4vw, 40px);
+}
 
-    & h2 {
-        font-size: clamp(20px, 4vw, 40px);
-    }
-
-    & p {
-        width: 60%;
-        text-wrap: balance;
-        line-height: 1.6;
-    }
+.principal p {
+    width: 60%;
+    text-wrap: balance;
+    line-height: 1.6;
 }
 
 .btn {
@@ -134,8 +133,14 @@ nav ul li a:hover {
     border-radius: 70px;
     transition: background-color var(--transition);
 
-    &:hover {
-        background-color: transparent;
-    }
+}
+
+.btn:hover {
+    background-color: transparent;
+}
+
+.principal a{
+    text-decoration: none;
+    color: aliceblue;
 }
 /*********************** fim principal ***********************/

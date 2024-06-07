@@ -4,6 +4,7 @@ Esse repositório servirá para armazenar a entrega relacionada a disciplina de 
 Integrantes do grupo:
 Wendell dos Santos Silva RM558859
 Lorenzzo Vendruscolo Dias  RM558305
+Davi Schaeffer Aguiar 554951
 
 Descrição do projeto:
 Idealizamos um site voltado para o tema principal da Global Solution (GS) FIAP 2024, primeiro semestre, cujo foco é a Economia Azul. Foi proposto para a nossa turma de Engenharia de Software a prototipação de um site envolvendo alguma solução eficaz para o cuidado e manutenção de oceanos, a fim de tornar as atividades ali realizadas mais sustentáveis. Tendo em vista essa abordagem, nosso grupo prototipou o projeto BeOcean: uma plataforma ideal para organiazações como ONG's se conectarem com voluntários de forma mais simples e funcional. 
