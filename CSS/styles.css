@@ -9,8 +9,9 @@
 
 * {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: var(--font-body);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/imagem_volunteer2.jpeg");
@@ -24,6 +25,7 @@ body {
 }
 header {
     display: flex;
+    height: 80px;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -32,8 +34,9 @@ header {
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-html {
-    scroll-behavior: smooth;
+
+header h1 {
+    font-size: 24px;
 }
 
 nav ul {
@@ -57,17 +60,22 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-
-header h1 {
-    font-size: 24px;
-}
-
 /*********************** principal-page ***********************/
 
 .container {
     width: 100%;
     height: 100vh;   
-    background-image: linear-gradient( to top, rgba(0, 0, 0, .8), 
+    background-image: 
+    url(../images/pexels-kellie-churchman-371878-1001682.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.container-sobrenós{
+    width: 100%;
+    height: 100vh;   
+    background-image: linear-gradient( to bottom, rgba(0, 0, 0, 0.399), 
     rgba(0, 0, 0, .3)),
     url(../images/pexels-kellie-churchman-371878-1001682.jpg);
     background-repeat: no-repeat;
