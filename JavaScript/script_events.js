@@ -4,14 +4,14 @@ const lista_empresas = JSON.parse(localStorage.getItem('empresas_users'));
 const login_check = JSON.parse(localStorage.getItem('login_check'));
 let userType = '';
 
+// Função para verificar qual usuário está logado, principal o tipo de usuário
 function verifyUser(){
     if (lista_voluntarios) {
         lista_voluntarios.forEach(user => {
             if (login_check.username === user.username) {
-                // console.log(user.profileType);
                 userType = user.profileType;
-                document.getElementById('btnCriarNovoEvento').style.display = 'none';
-                document.querySelector('#eventosDisponiveis').style.display = 'block';
+                document.getElementById('btnCriarNovoEvento').style.display = 'none'; //ocultação do botão Criar Evento. Perfil de voluntário
+                document.querySelector('#eventosDisponiveis').style.display = 'block'; //mostra os eventos cadastrados
                 return user.profileType;
             }
         });
@@ -26,20 +26,19 @@ function verifyUser(){
                 <button type="submit" id="btnCriarNovoEvento">Criar Novo Evento</button>  
                 `;
                 document.querySelector('#eventosDisponiveis').style.display = 'block';
-
-                // Reatribuir os event listeners após a criação dos botões
-                document.querySelector('#btnEventosDisponiveis').addEventListener("click", mostrarEventosDisponiveis);
+                document.querySelector('#btnEventosDisponiveis').addEventListener("click", mostrarEventosDisponiveis); // Reatribuir os event listeners após a criação dos botões
                 document.querySelector('#btnCriarNovoEvento').addEventListener('click', mostrarCriarEvento);
                 return user.profileType;
             }
         });
     }
-    if(login_check===false || login_check===null){
+   // posiveis situações para o login_check = item do localStorage responsável por mostrar se o usuario logou ou não 
+    if(login_check===false || login_check===null){ 
         alert('Faça seu login para ver os Eventos Disponíveis')
         document.getElementById('escolha').style.display = 'none'
     }
 }
-
+//funções realizadas ao carregar a página
 window.onload = function(event) {
     event.preventDefault();
     verifyUser();
@@ -48,6 +47,7 @@ window.onload = function(event) {
 
 const create_section = document.getElementById('criarEvento');
 const eventosDisponiveis = document.querySelector('#eventosDisponiveis');
+//pega os eventos do localStorage
 let listaEventos = JSON.parse(localStorage.getItem('eventos')) || [];
 
 // Salvar eventos no localStorage
@@ -55,7 +55,7 @@ function salvarEventos() {
     localStorage.setItem('eventos', JSON.stringify(listaEventos));
 }
 
-// #########CREATE
+// #########CREATE EVENTS
 function criaEventos(dados){
     const new_event = {
         id: listaEventos.length + 1,
@@ -77,7 +77,7 @@ function criaEventos(dados){
     }
 }
 
-// ###########READ
+// ###########READ EVENTS
 function pegaEventos(){
     eventosDisponiveis.innerHTML = '';
     if (listaEventos.length === 0) {
@@ -107,7 +107,7 @@ function pegaEventos(){
     } 
 }
 
-// ###########UPDATE
+// ###########UPDATE EVENTS
 function atualizarEvento(id){
     const evento = listaEventos.find(evento => evento.id === id);
     if (!evento) return;  // se evento for igual a vazio, null, NaN etc, vai fechar a função
@@ -145,14 +145,14 @@ function salvarAtualizacao(id) {
     pegaEventos();
 }
 
-// ###########DELETE
+// ###########DELETE EVENTS
 function apagarEvento(id){
     listaEventos = listaEventos.filter(evento => evento.id !== id);
     salvarEventos();
     pegaEventos();
 }
 
-// ###########INSCRIÇÃO
+// ###########INSCRIÇÃO EVENTS == PARA USUÁRIOS VOLUNTÁRIOS
 function inscreverEvento(id){
     alert("Inscrição realizada!");
 }
@@ -191,7 +191,7 @@ function mostrarCriarEvento(event){
 
     document.querySelector('#cadastrarEvento').addEventListener('click', function(event){
         event.preventDefault();
-        let novoevento = criaEventos({
+        let novoevento = criaEventos({  //cria eventos retorna True se todos os campos forem preenchidos
             owner: login_check.username,
             content: descricao.value,
             name_event: name_event.value,
@@ -206,6 +206,7 @@ function mostrarCriarEvento(event){
     });
 }
 
+//funcao para mostrar os eventos disponiveis, para ambos tipos de usuários
 function mostrarEventosDisponiveis(event) {
     event.preventDefault();
     create_section.style.display = 'none';

@@ -1,8 +1,12 @@
 // ################################## EVENT PAGE #######################################
+
+//pegar informações do localStorage
 const lista_voluntarios = JSON.parse(localStorage.getItem('voluntarios_users'));
 const lista_empresas = JSON.parse(localStorage.getItem('empresas_users'));
 var login_check = JSON.parse(localStorage.getItem('login_check'));
 let userType = '';
+
+//função para veficiar qual o tipo de usuario e qual usuario esta logado. Também verifica se não foi logado
 function verifyUser(){
     let user_dados = ''
     if (lista_voluntarios) {
@@ -25,7 +29,6 @@ function verifyUser(){
         });
     }
     if(login_check===false || login_check===null || login_check === ''){
-        // alert('Faça login')
         document.getElementById('container').innerHTML = ''
         document.getElementById('container').innerHTML = `
         <h3>Faça seu login ou cadastre-se!</h3>
@@ -34,7 +37,7 @@ function verifyUser(){
             <button type="submit" id="btn-login">Login</button>
         </div>
         `
-        document.getElementById('btn-login').addEventListener('click', function(event){
+        document.getElementById('btn-login').addEventListener('click', function(event){ //solicitação de login
             event.preventDefault
             window.location.href = "register_page.html";
             user_dados = false;
@@ -44,6 +47,7 @@ function verifyUser(){
 }
 
 
+//ao carregar a pagina carrega informações do usuario logado
 window.onload = function(event) {
     event.preventDefault();
     const user_dados = verifyUser()

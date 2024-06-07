@@ -26,12 +26,16 @@ const gender_id = document.getElementById('gender');
 const birthday_id = document.getElementById('birthday');
 const foto_id = document.getElementById('profile-pic');
 // ############################ DECLARAÇÃO FUNÇÕES ############################
+
+//função utilizada quando os dados inseridos passam por uma validação, altera cor do campo e apaga mensagem de erro
 function confirmDados(error_msg_id, InputId){
     error_msg_id.innerHTML = '';
     error_msg_id.setAttribute('style', 'color: green; font-size: 12px');
     InputId.setAttribute('style', 'border-color: green; border-width: 2px')
 }
 
+//principal função de verificao. Input de uma validação a ser feita, e os ids do elemento que vai ser verificado (InputID)
+//e dos elementos que vão ser alterados (mensagem de erro)
 function verificaElementos(function_contem_or_not, InputId, error_msg_id, error_msg_text){
     if(function_contem_or_not){
         error_msg_id.innerHTML = '';
@@ -43,6 +47,7 @@ function verificaElementos(function_contem_or_not, InputId, error_msg_id, error_
     return false;
 }
 
+//função para verificar se o valor inserido contém numeros
 function containsNumber(inputValue) {
     let has_Number = false;
     inputValue.split('').forEach(char => {
@@ -53,22 +58,23 @@ function containsNumber(inputValue) {
     return has_Number;
 }
 
+//funcao usada para verificar TODOS os requisitos da senha do usuário
 function passwordRequirements(inputValue){
     let has_Number = false;
     let has_Maiuscula = false;
     let has_SpecialChar = false;
     senha = inputValue.value;
-    senha.split('').forEach(char => {
-        if (!isNaN(char)) {
+    senha.split('').forEach(char => { // usado para transformar em lista a senha inseridade
+        if (!isNaN(char)) { //se o caracter for number primeira verificação OK
             has_Number = true;
         }
-        if (isNaN(char)){
+        if (isNaN(char)){ //validação se há caracteres maiusculos
             let char_maiusc = char.toUpperCase();
-            if (char_maiusc === char && char.toLowerCase() !== char) { // Verificação corrigida
+            if (char_maiusc === char && char.toLowerCase() !== char) { 
                 has_Maiuscula = true;
             }
         }
-        if(caracteresEspeciais(senha_id)){
+        if(caracteresEspeciais(senha_id)){ //verificao de caracteres especiais
             has_SpecialChar = true;
         }
     });
@@ -81,7 +87,7 @@ function passwordRequirements(inputValue){
         return false;           
     }
 }
-
+//função para verificar a existencia de caracteres especiais
 function caracteresEspeciais(inputValue) {
     let has_SpecialChar = false;
     senha = inputValue.value;
@@ -93,6 +99,7 @@ function caracteresEspeciais(inputValue) {
     return has_SpecialChar;
 }
 
+//função para verificar username
 function verificaUsername(){
     let username = username_id.value;
     if(verificaElementos(username === '', username_id, error_msg_username, 'Preencha esse campo.')){
@@ -113,6 +120,7 @@ function verificaUsername(){
     }
 }
 
+//função para verificar se username ja existe no localStorage
 function verificaUsernameExistente(username){
     if(lista_voluntarios.some(user => user.username === username)){
         verificaElementos(true, username_id, error_msg_username, 'Este ID de usuário já está em uso');
@@ -160,6 +168,7 @@ function verificaSenha(){
 
 }
 
+//funcao para verificar se foi escolhida uma opcao dentro de uma lista, como regiao e genero
 function verificaOpcoes(InputId, error_msg_id){
     let value = InputId.value;
     if(verificaElementos(value ==='', InputId, error_msg_id ,'Escolha uma das opções acima.')){
@@ -225,12 +234,17 @@ function verificaFoto(){
     }
 }
 
+//funcao para verificar se o login é de voluntario. pega informações do user e vefica na lista voluntarios
 function verificaLoginVoluntarios(){
     return lista_voluntarios.some(voluntario => voluntario.username === username_id.value);
 }
+
+//o mesmo que a funcao acima so que para empresas
 function verificaLoginEmpresas(){
     return lista_empresas.some(empresa => empresa.username === username_id.value);
 }
+
+//validacao se a senha bate com o username
 function verificarSenhaxLogin(){
     for (let voluntario of lista_voluntarios) {
         if (voluntario.username === username_id.value) {
@@ -262,6 +276,7 @@ const register_form = document.getElementById('registration-form');
 const btnlogin_in = document.getElementById('btn-login');
 const btncadastrar_se = document.getElementById('btnCadastreSe');
 
+//ao clicar botao de login (fzr login)
 btnlogin_in.addEventListener('click', function(event){
     event.preventDefault();
     register_form.style.display = 'block';
@@ -315,6 +330,8 @@ btnlogin_in.addEventListener('click', function(event){
 
 })
 
+
+//ao clicar o botao de cadastre-se. definição do que vai ser mostrado na tela
 btncadastrar_se.addEventListener('click', function(event){
     event.preventDefault();
     register_form.style.display = 'none';
@@ -341,7 +358,7 @@ btncadastrar_se.addEventListener('click', function(event){
         btnSubmitCadastro.style.display = 'block';
         let title = document.querySelector('h3');
         title.innerHTML = 'Cadastro de Voluntário'; 
-        profileType = 'voluntario'  
+        profileType = 'voluntario'  //definicao do tipo de profile
     });
 
     btn_empresa_register.addEventListener('click', function(event){
@@ -354,11 +371,11 @@ btncadastrar_se.addEventListener('click', function(event){
         title.innerHTML = 'Cadastro de Empresa';
         document.querySelector('#campo9').style.display = 'none';
         document.querySelector('#campo10').style.display = 'none';
-        profileType = 'empresa'  
+        profileType = 'empresa'  //definicao do tipo de profile  
     });
 })
 
-
+///verificação dos campos de informações
 btn_cadastrar.addEventListener('click', function(event){
     event.preventDefault();
     if(profileType === 'voluntario'){
@@ -387,7 +404,7 @@ btn_cadastrar.addEventListener('click', function(event){
             foto: foto_id.value,
             profileType: 'voluntario'
         }
-        lista_voluntarios.push(new_user);
+        lista_voluntarios.push(new_user);  //guardou na lista de usuarios
         let container = document.querySelector('.container')
         container.innerHTML = ''
         container.innerHTML = `
@@ -405,9 +422,9 @@ btn_cadastrar.addEventListener('click', function(event){
             username: username_id.value,
             senha: senha_id.value
         }
-        login_check = user_online;
-        localStorage.setItem('login_check', JSON.stringify(login_check));
-        localStorage.setItem('voluntarios_users', JSON.stringify(lista_voluntarios));
+        login_check = user_online; //login_check usado para saber se um usuario esta logado
+        localStorage.setItem('login_check', JSON.stringify(login_check)); //guardando informaçoes do login check
+        localStorage.setItem('voluntarios_users', JSON.stringify(lista_voluntarios)); //guardando informaçoes dos voluntarios
         };
 
     }
@@ -431,7 +448,7 @@ btn_cadastrar.addEventListener('click', function(event){
                 foto: foto_id.value,
                 profileType: 'empresa'
             }
-            lista_empresas.push(new_user);
+            lista_empresas.push(new_user); //guardou na lista de empresas
             let container = document.querySelector('.container')
             container.innerHTML = ''
             container.innerHTML = `
