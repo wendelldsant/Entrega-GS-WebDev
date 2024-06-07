@@ -8,7 +8,7 @@ function verifyUser(){
     if (lista_voluntarios) {
         lista_voluntarios.forEach(user => {
             if (login_check.username === user.username) {
-                console.log(user.profileType);
+                // console.log(user.profileType);
                 userType = user.profileType;
                 document.getElementById('btnCriarNovoEvento').style.display = 'none';
                 document.querySelector('#eventosDisponiveis').style.display = 'block';
@@ -19,7 +19,7 @@ function verifyUser(){
     if (lista_empresas) {
         lista_empresas.forEach(user => {
             if (login_check.username === user.username) {
-                console.log(user.profileType);
+                // console.log(user.profileType);
                 userType = user.profileType;
                 document.getElementById('escolha').innerHTML = `
                 <button type="submit" id="btnEventosDisponiveis">Eventos Disponíveis</button>

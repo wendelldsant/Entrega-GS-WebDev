@@ -8,19 +8,19 @@ function verifyUser(){
     if (lista_voluntarios) {
         lista_voluntarios.forEach(user => {
             if (login_check.username === user.username) {
-                console.log(user.profileType);
+                // console.log(user.profileType);
                 user_dados = user;
-                console.log(user_dados);
+                // console.log(user_dados);
             }
         });
     }
     if (lista_empresas) {
         lista_empresas.forEach(user => {
             if (login_check.username === user.username) {
-                console.log(user.profileType);
+                // console.log(user.profileType);
                 userType = user.profileType;
                 user_dados = user;
-                console.log(user_dados);
+                // console.log(user_dados);
             }
         });
     }

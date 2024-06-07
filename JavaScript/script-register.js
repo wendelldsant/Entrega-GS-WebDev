@@ -62,9 +62,9 @@ function passwordRequirements(inputValue){
         if (!isNaN(char)) {
             has_Number = true;
         }
-        if(isNaN(char)){
+        if (isNaN(char)){
             let char_maiusc = char.toUpperCase();
-            if(char_maiusc === char){
+            if (char_maiusc === char && char.toLowerCase() !== char) { // Verificação corrigida
                 has_Maiuscula = true;
             }
         }
